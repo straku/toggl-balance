@@ -9,3 +9,9 @@ before_script:
   - npm prune
 script:
   - npm run test:single
+  - npm run build
+after_success:
+  - bash deploy.sh
+env:
+  global:
+    - secure: "Y/GmKGoY3EfvRWI1j/qLhNXlemdLMqKqrfB9jGfSYyNqZwx+jE45cpLHBLUk1EAeQGQeGPWthduUIejPL0lbZCCI5p1YL1Ln8ESmxnrRhBRGGig+LnAFXKYfwWsWYE/FqhhvTi4E0l8ZfFcE+aRl2XErB0XUy83duwDg1HygLi9c9LwlHTeVMNPPT8qjbWCEjcslsry/DmirXF30y9n3S1VBeh3PSiCipFmWfTMX49JfD9gcgh6DuDpAuoX3o8jOYWXeNv+tzhdOOJpVEw7ePtoN3C7RgRIT+RchAwiY76ZVaVOfNLEvOCCRhkd68HeYJuYQOMnC6OHMteZGF60kHFcxBF2VwXdC/hlEki1aW03Rs2mjFhs3+r2sfdmmZCbOF9fIYFBiZBC46vtZwbXYyfIZIwqlK2NCMDtdGuRDyVhLYpJMDOwr+lUg4yNTI3TItVtPqojQf3UuHPGYAVe3/5nwFz96J4BRsOFVqi/fF+ldeu0PhUgQOOXWl1iiB1ZNno2vCJGgNaTnPpiOXXcc57GsNDE3Ix5F8TMXbEGKeWoHJQ728C+ldkZXEhOVwGPr2OZ5DGfTJsH4sCCSOiiJlTvP/B5UZHLZM3ibeFYrGK9Eukej9luqwXqBx+q+hnESPT5wplwitGt9RHU2xEodQdXUXgvVZ1VZtjdhUX+1vCU="
