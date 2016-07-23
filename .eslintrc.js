@@ -31,16 +31,6 @@ module.exports = {
     'space-before-function-paren': [2, 'always'],
     'max-len': [2, 120, 2],
     'no-trailing-spaces': [2, { skipBlankLines: true }],
-
-    // import errors
-    'import/no-unresolved': 2,
-    'import/named': 2,
-    'import/default': 2,
-    'import/namespace': 2,
-    'import/export': 2,
-
-    // import warnings
-    'import/no-duplicates': 1,
   },
   plugins: [
     'babel',

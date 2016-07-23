@@ -1,15 +1,11 @@
 const path = require('path')
-const webpack = require('webpack')
-const autoprefixer = require('autoprefixer')
 
 const cssLoaderQuery = '?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-source-map',
 
   entry: [
-    'webpack-hot-middleware/client',
-    'react-hot-loader/patch',
     './app/setup/index',
   ],
 
@@ -25,17 +21,15 @@ module.exports = {
     },
   },
 
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-  ],
-
   module: {
     loaders: [
       {
         test: /\.js$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'app'),
+        include: [
+          path.join(__dirname, 'app'),
+          path.join(__dirname, 'test'),
+        ],
       },
       {
         test: /\.css$/,
@@ -48,7 +42,10 @@ module.exports = {
     ],
   },
 
-  postcss: [
-    autoprefixer({ browsers: ['last 2 versions'] }),
-  ],
+  externals: {
+    cheerio: 'window',
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  },
 }
