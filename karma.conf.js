@@ -20,9 +20,18 @@ module.exports = (config) => {
       noInfo: true,
     },
 
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage'],
+
     mochaReporter: {
       showDiff: true,
+    },
+
+    coverageReporter: {
+      reporters: [
+        { type: 'text-summary' },
+        { type: 'lcovonly', subdir: '.' },
+        { type: 'json', subdir: '.' },
+      ],
     },
 
     port: 9876,

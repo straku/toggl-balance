@@ -5,12 +5,16 @@ node_js:
 branches:
   only:
     - master
+install:
+  - npm install
+  - npm install codecov -g
 before_script:
   - npm prune
 script:
   - npm run test:single
   - npm run build
 after_success:
+  - codecov
   - bash deploy.sh
 env:
   global:
