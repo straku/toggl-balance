@@ -33,6 +33,7 @@ module.exports = {
     'no-trailing-spaces': [2, { skipBlankLines: true }],
     'no-console': 0,
     'no-use-before-define': 0,
+    'react/jsx-filename-extension': 0
   },
   plugins: [
     'babel',

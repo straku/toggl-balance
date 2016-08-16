@@ -1,8 +1,8 @@
-import '../styles/main.css'
-
 import React from 'react'
 import { render } from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
+import { AppContainer } from 'react-hot-loader' // eslint-disable-line import/no-extraneous-dependencies
+
+import '../styles/main.css'
 
 import Root from './Root'
 import store from './store'
@@ -15,6 +15,7 @@ import store from './store'
 // TODO: Simplify when https://github.com/reactjs/react-router/issues/2182 will land
 import referentialyEqualRootRoute from './referentially-equal-root-route'
 import routeDefinitions from '../routes'
+
 const routes = Object.assign(referentialyEqualRootRoute, routeDefinitions)
 
 const rootElement = document.getElementById('root')

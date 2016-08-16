@@ -37,7 +37,7 @@ function getNumberOfWorkDays (perWeek, start, end) {
   const remainingAfter = stripAfter > perWeek ? perWeek : stripAfter
 
   // add subtracted workdays to final result
-  return perWeek * numberOfFullWeeks + remainingBefore + remainingAfter
+  return (perWeek * numberOfFullWeeks) + remainingBefore + remainingAfter
 }
 
 function getHours (startDate, endDate, perWeek, hoursPerDay) {
@@ -48,4 +48,4 @@ function getHours (startDate, endDate, perWeek, hoursPerDay) {
   return numberOfWorkDays * hoursPerDay
 }
 
-export { getHours }
+export default getHours

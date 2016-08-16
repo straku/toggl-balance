@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { expect } from 'chai'
+import { expect } from 'test/expect'
 
 import { getHours } from './time'
 

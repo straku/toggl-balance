@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import chai from 'chai'
 import dirtyChai from 'dirty-chai'
 import chaiEnzyme from 'chai-enzyme'

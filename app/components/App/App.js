@@ -29,7 +29,7 @@ class App extends Component {
       }))
       .then(res => {
         const workedTime = res.data.total_grand
-        const balance = workedTime - getHours(since, moment().subtract(1, 'day'), 5, 8) * 3600 * 1000
+        const balance = workedTime - (getHours(since, moment().subtract(1, 'day'), 5, 8) * 3600 * 1000)
         const balanceDuration = moment.duration(Math.abs(balance))
         const [h, m, s] = [
           balanceDuration.hours(),
