@@ -1,7 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import moment from 'moment'
-import { expect } from 'test/expect'
+import { expect } from 'chai'
 
-import { getHours } from './time'
+import getHours from './time'
 
 const FORMAT = 'DD-MM-YYYY'
 

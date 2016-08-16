@@ -3,7 +3,7 @@ import { StyleSheet, css } from 'aphrodite'
 import moment from 'moment'
 
 import { getUser, getSummary } from '../../toggl/api'
-import { getHours } from '../../calc/time'
+import getHours from '../../calc/time'
 
 class App extends Component {
   state = {
