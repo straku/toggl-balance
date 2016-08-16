@@ -31,6 +31,8 @@ module.exports = {
     'space-before-function-paren': [2, 'always'],
     'max-len': [2, 120, 2],
     'no-trailing-spaces': [2, { skipBlankLines: true }],
+    'no-console': 0,
+    'no-use-before-define': 0,
   },
   plugins: [
     'babel',

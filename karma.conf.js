@@ -22,13 +22,10 @@ module.exports = (config) => {
 
     reporters: ['mocha', 'coverage'],
 
-    mochaReporter: {
-      showDiff: true,
-    },
-
     coverageReporter: {
       reporters: [
         { type: 'text-summary' },
+        { type: 'html', subdir: '.' },
         { type: 'lcovonly', subdir: '.' },
         { type: 'json', subdir: '.' },
       ],
