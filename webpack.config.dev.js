@@ -2,8 +2,6 @@ const path = require('path')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 
-const cssLoaderQuery = '?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
-
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
 
@@ -43,7 +41,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: `style!css-loader${cssLoaderQuery}!sass-loader!postcss-loader`,
+        loaders: 'style!css-loader!sass-loader!postcss-loader',
       },
     ],
   },

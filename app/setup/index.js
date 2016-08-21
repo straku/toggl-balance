@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader' // eslint-disable-line import/no-extraneous-dependencies
 
-import '../styles/main.css'
+import '../styles/main.scss'
 
 import Root from './Root'
 import store from './store'

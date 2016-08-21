@@ -1,7 +1,5 @@
 const path = require('path')
 
-const cssLoaderQuery = '?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
-
 module.exports = {
   devtool: 'inline-source-map',
 
@@ -37,7 +35,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: `style!css-loader${cssLoaderQuery}!sass-loader!postcss-loader`,
+        loaders: 'style!css-loader!sass-loader!postcss-loader',
       },
     ],
   },
@@ -46,6 +44,6 @@ module.exports = {
     cheerio: 'window',
     'react/addons': true,
     'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': true
+    'react/lib/ReactContext': true,
   },
 }
