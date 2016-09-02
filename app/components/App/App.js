@@ -1,67 +1,75 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import { StyleSheet, css } from 'aphrodite'
+import { connect } from 'react-redux'
 import moment from 'moment'
 
-import { getUser, getSummary } from '../../toggl/api'
-import getHours from '../../calc/time'
+import { fullCentered } from '../../styles/fixtures'
+import { Balance, User, STATUS } from '../../selectors'
 
-class App extends Component {
-  state = {
-    token: null,
-    since: null,
-    balance: null,
+import { getTotalTime } from '../../actions'
+
+function formatBalance (balance) {
+  const balanceDuration = moment.duration(Math.abs(balance))
+  const [h, m, s] = [
+    (balanceDuration.days() * 24) + balanceDuration.hours(),
+    balanceDuration.minutes(),
+    balanceDuration.seconds(),
+  ]
+  return `${balance > 0 ? '+' : '-'} ${h} : ${m} : ${s}`
+}
+
+function mapStateToProps (state) {
+  return {
+    user: User.select(state),
+    ...Balance.select(state),
+  }
+}
+
+export class App extends Component {
+  static propTypes = {
+    ...Balance.propTypes,
+    dispatch: PropTypes.func.isRequired,
   }
 
-  handleAPIKeyChange = (e) => {
-    this.setState({ token: e.target.value }, () => console.log(this.state))
+  componentDidMount () {
+    this.fetchTime(this.props)
   }
 
-  handleStartDateChange = (e) => {
-    this.setState({ since: e.target.value }, () => console.log(this.state))
+  componentWillReceiveProps (props) {
+    this.fetchTime(props)
   }
 
-  handleClick = () => {
-    const { token, since } = this.state
-    getUser(token)
-      .then(res => getSummary(token, {
-        since,
-        workspace_id: res.data.data.workspaces[0].id,
-      }))
-      .then(res => {
-        const workedTime = res.data.total_grand
-        const balance = workedTime - (getHours(since, moment().subtract(1, 'day'), 5, 8) * 3600 * 1000)
-        const balanceDuration = moment.duration(Math.abs(balance))
-        const [h, m, s] = [
-          balanceDuration.hours(),
-          balanceDuration.minutes(),
-          balanceDuration.seconds(),
-        ]
-        this.setState({
-          balance: `${balance > 0 ? '+' : '-'} ${h} : ${m} : ${s}`,
-        })
-      })
+  fetchTime = (props) => {
+    const { balance, status, user, location, dispatch } = props
+
+    if (
+      location.pathname === '/' &&
+      user.status === STATUS.success &&
+      status === null &&
+      balance === null
+    ) {
+      dispatch(getTotalTime())
+    }
   }
 
   render () {
-    const { balance } = this.state
+    const { children, status, balance, user } = this.props
+    const { success } = STATUS
+
+    if (children) {
+      return <div className={css(styles.container)}>{children}</div>
+    }
+
     return (
       <div className={css(styles.container)}>
-        <div className={css(styles.inputs)}>
-          <input
-            type="text"
-            className={css(styles.input)}
-            onChange={this.handleAPIKeyChange}
-          />
-          <input
-            type="text"
-            className={css(styles.input)}
-            onChange={this.handleStartDateChange}
-          />
-        </div>
-        <button onClick={this.handleClick}>Download</button>
-        <div className={css(styles.balance)}>
-          {balance || 'click download to get balance'}
-        </div>
+        {
+          (user.status === success && status === success && balance) ? (
+            <div>{formatBalance(balance)}</div>
+          ) : (
+            <Link to="/setup/token">Setup</Link>
+          )
+        }
       </div>
     )
   }
@@ -69,23 +77,8 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-  },
-  inputs: {
-  },
-  input: {
-    margin: 5,
-  },
-  balance: {
-    marginTop: 25,
-    fontFamily: ['Futura', 'Arial'],
-    fontSize: '40px',
+    ...fullCentered,
   },
 })
 
-export default App
+export default connect(mapStateToProps)(App)

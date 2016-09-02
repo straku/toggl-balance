@@ -1,8 +1,7 @@
-// Redux and middlewares
 import { applyMiddleware, createStore } from 'redux'
 import createLogger from 'redux-logger'
+import thunk from 'redux-thunk'
 
-// combined reducers as single reducer
 import reducers from '../reducers'
 
 const logger = createLogger({
@@ -10,4 +9,9 @@ const logger = createLogger({
   collapsed: true,
 })
 
-export default createStore(reducers, applyMiddleware(logger))
+const store = createStore(
+  reducers,
+  applyMiddleware(thunk, logger)
+)
+
+export default store
