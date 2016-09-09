@@ -1,11 +1,5 @@
 import actions from './actions'
 
-const status = {
-  loading: 'LOADING',
-  success: 'SUCCESS',
-  error: 'ERROR',
-}
-
 const initialState = {
   user: {
     status: null,
@@ -28,14 +22,14 @@ const reducers = {
     ...state,
     user: {
       ...state.user,
-      status: status.loading,
+      status: 'LOADING',
     },
   }),
   [actions.user.success]: (state, user) => ({
     ...state,
     user: {
       ...user,
-      status: status.success,
+      status: 'SUCCESS',
       error: null,
     },
   }),
@@ -44,25 +38,22 @@ const reducers = {
     user: {
       ...state.user,
       error,
-      status: status.error,
+      status: 'ERROR',
     },
   }),
-  [actions.sinceDate]: (state, sinceDate) => ({
-    ...state,
-    sinceDate,
-  }),
+
   [actions.totalTime.request]: (state) => ({
     ...state,
     totalTime: {
       ...state.totalTime,
-      status: status.loading,
+      status: 'LOADING',
     },
   }),
   [actions.totalTime.success]: (state, totalTime) => ({
     ...state,
     totalTime: {
       data: totalTime,
-      status: status.success,
+      status: 'SUCCESS',
       error: null,
     },
   }),
@@ -71,9 +62,15 @@ const reducers = {
     totalTime: {
       ...state.totalTime,
       error,
-      status: status.error,
+      status: 'ERROR',
     },
   }),
+
+  [actions.sinceDate]: (state, sinceDate) => ({
+    ...state,
+    sinceDate,
+  }),
+
   [actions.balance]: (state, balance) => ({
     ...state,
     balance,

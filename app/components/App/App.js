@@ -5,17 +5,17 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 
 import { fullCentered } from '../../styles/fixtures'
-import { Balance, User, STATUS } from '../../selectors'
+import { Balance, User } from '../../selectors'
 
 import { getTotalTime } from '../../actions'
 
 function formatBalance (balance) {
   const balanceDuration = moment.duration(Math.abs(balance))
-  const [h, m, s] = [
-    (balanceDuration.days() * 24) + balanceDuration.hours(),
-    balanceDuration.minutes(),
-    balanceDuration.seconds(),
-  ]
+
+  const h = (balanceDuration.days() * 24) + balanceDuration.hours()
+  const m = balanceDuration.minutes()
+  const s = balanceDuration.seconds()
+
   return `${balance > 0 ? '+' : '-'} ${h} : ${m} : ${s}`
 }
 
@@ -40,12 +40,12 @@ export class App extends Component {
     this.fetchTime(props)
   }
 
-  fetchTime = (props) => {
+  fetchTime (props) {
     const { balance, status, user, location, dispatch } = props
 
     if (
       location.pathname === '/' &&
-      user.status === STATUS.success &&
+      user.status === 'SUCCESS' &&
       status === null &&
       balance === null
     ) {
@@ -55,21 +55,23 @@ export class App extends Component {
 
   render () {
     const { children, status, balance, user } = this.props
-    const { success } = STATUS
 
     if (children) {
       return <div className={css(styles.container)}>{children}</div>
     }
 
+    let content
+    if (status === 'LOADING') {
+      content = <div>Loading ...</div>
+    } else if (user.status === 'SUCCESS' && status === 'SUCCESS' && balance) {
+      content = <div>{formatBalance(balance)}</div>
+    } else {
+      content = <Link to="/setup/token">Setup</Link>
+    }
+
     return (
       <div className={css(styles.container)}>
-        {
-          (user.status === success && status === success && balance) ? (
-            <div>{formatBalance(balance)}</div>
-          ) : (
-            <Link to="/setup/token">Setup</Link>
-          )
-        }
+        {content}
       </div>
     )
   }

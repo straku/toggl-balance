@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { fullCentered } from '../../../styles/fixtures'
 
 import { getUser } from '../../../actions'
-import { STATUS, User } from '../../../selectors'
+import { User } from '../../../selectors'
 
 class Token extends Component {
   static propTypes = {
@@ -41,14 +41,14 @@ class Token extends Component {
           <input
             type="text"
             id="token-input"
-            value={status === STATUS.success ? token : input}
+            value={status === 'SUCCESS' ? token : input}
             className={css(styles.input)}
             onChange={this.handleChange}
           />
           <button type="button" onClick={this.handleClick}>OK</button>
         </div>
         <div>
-          {status === STATUS.loading && 'Loading...'}
+          {status === 'LOADING' && 'Loading...'}
           {name &&
             <div>
               {`Hi, ${name}! Your token looks great, `}

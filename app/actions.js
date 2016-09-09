@@ -49,7 +49,6 @@ function getTotalTime () {
 
 function calculateBalance (since, totalTime) {
   const norm = getHours(since, moment().subtract(1, 'day'), 5, 8) * 3600 * 1000
-  console.log(norm, totalTime)
   const balance = totalTime - norm
 
   return {

@@ -26,7 +26,6 @@ function parseUser (user) {
 }
 
 function parseSummary (data) {
-  console.log(data)
   return data.total_grand
 }
 
