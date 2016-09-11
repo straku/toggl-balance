@@ -121,12 +121,12 @@ const styles = StyleSheet.create({
     ...centered,
   },
   welcome: {
-    width: '50%',
+    width: '600px',
     textAlign: 'center',
   },
   footer: {
     flexGrow: 0,
-    width: '50%',
+    width: '600px',
     margin: '0 auto',
     justifyContent: 'center',
   },
