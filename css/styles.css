@@ -1,8 +1,23 @@
-body {
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);body {
   margin: 0;
   width: 100vw;
-  height: 100vh; }
+  height: 100vh;
+  font-family: "Roboto Mono", monospace; }
 
 #root {
   width: 100vw;
   height: 100vh; }
+.loading {
+  display: inline-block;
+  position: relative; }
+
+.loader:after {
+  content: "...";
+  position: absolute;
+  width: 0;
+  overflow: hidden;
+  animation: ellipsis steps(4, end) 1s infinite; }
+
+@keyframes ellipsis {
+  to {
+    width: 2.4em; } }
