@@ -6,5 +6,5 @@ export function getBasePath () {
 
 export function getPath (path) {
   if (basePath === '/') return path
-  return `${basePath}path`
+  return basePath + path
 }
