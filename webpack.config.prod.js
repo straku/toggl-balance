@@ -34,6 +34,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: 'static/index-prod.html', to: 'index.html' },
+      { from: 'static/404.html', to: '404.html' },
     ]),
   ],
 

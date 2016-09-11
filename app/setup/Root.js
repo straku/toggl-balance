@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { Provider } from 'react-redux'
-import { Router, hashHistory } from 'react-router'
+import { Router, browserHistory } from 'react-router'
 
 const Root = ({ store, routes }) => (
   <Provider store={store}>
-    <Router history={hashHistory} routes={routes} />
+    <Router history={browserHistory} routes={routes} />
   </Provider>
 )
 
