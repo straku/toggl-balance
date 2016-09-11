@@ -9,8 +9,10 @@ import Setup from './components/Setup/Setup'
 import Token from './components/Setup/Token/Token'
 import SinceDate from './components/Setup/SinceDate/SinceDate'
 
+const basePath = (process.env.NODE_ENV === 'production') ? '/toggl-balance' : '/'
+
 export default (
-  <Route path="/" component={redirect(App)}>
+  <Route path={basePath} component={redirect(App)}>
     <Route path="setup" component={Setup}>
       <IndexRoute component={Token} />
       <Route path="token" component={Token} />
