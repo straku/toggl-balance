@@ -6,6 +6,8 @@ import moment from 'moment'
 
 import { Footer, Button } from 'rebass'
 
+import { getPath } from '../../utils/router'
+
 import Loader from '../Loader/Loader'
 import FavoriteIcon from '../../icons/Favorite'
 
@@ -41,7 +43,7 @@ const WelcomeScreen = () => (
     <p>Hey, <strong>Toggl Balance</strong> is an app that helps you check how much work you did toward your goal.</p>
     <p>To do that you need to go through some steps to provide access to your tracked time on Toggl and setup your goal.</p>
     <p>Click below to proceed to setup</p>
-    <Link to="/setup/token">
+    <Link to={getPath('/setup/token')}>
       <Button>Setup</Button>
     </Link>
   </div>

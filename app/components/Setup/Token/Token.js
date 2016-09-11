@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 
 import { InlineForm } from 'rebass'
 
+import { getPath } from '../../../utils/router'
+
 import Loader from '../../Loader/Loader'
 
 import { link, fullCentered } from '../../../styles/fixtures'
@@ -59,7 +61,7 @@ class Token extends Component {
               {'Hi, '}
               <strong>{name}</strong>
               {'! Your token looks great, '}
-              <Link className={css(styles.link)} to="/setup/since">proceed</Link>
+              <Link className={css(styles.link)} to={getPath('/setup/since')}>proceed</Link>
               {' to next step.'}
             </p>
           }
