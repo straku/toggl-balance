@@ -62,12 +62,13 @@ const styles = StyleSheet.create({
   container: {
     ...full,
     position: 'relative',
-    overflow: 'hidden',
     boxSizing: 'border-box',
+    overflow: 'hidden',
   },
   animated: {
     ...full,
     position: 'absolute',
+    top: 0,
   },
 })
 

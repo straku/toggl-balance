@@ -85,6 +85,7 @@
     "react-redux": "4.4.5",
     "react-router": "2.7.0",
     "react-router-transition": "0.0.6",
+    "rebass": "0.3.1",
     "redux": "3.5.2",
     "redux-logger": "2.6.1",
     "redux-thunk": "2.1.0"

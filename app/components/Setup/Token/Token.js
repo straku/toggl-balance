@@ -3,7 +3,12 @@ import { Link } from 'react-router'
 import { StyleSheet, css } from 'aphrodite'
 import { connect } from 'react-redux'
 
-import { fullCentered } from '../../../styles/fixtures'
+import { InlineForm } from 'rebass'
+
+import Loader from '../../Loader/Loader'
+
+import { link, fullCentered } from '../../../styles/fixtures'
+import { inline } from '../../../styles/utils'
 
 import { getUser } from '../../../actions'
 import { User } from '../../../selectors'
@@ -24,36 +29,39 @@ class Token extends Component {
     })
   }
 
-  handleClick = () => {
+  handleClick = (e) => {
     const { dispatch } = this.props
     const { input } = this.state
+
+    e.preventDefault()
+
     dispatch(getUser(input))
   }
 
   render () {
-    const { input } = this.state
-    const { status, token, name } = this.props
+    const { status, name } = this.props
 
     return (
       <div className={css(styles.container)}>
-        <label htmlFor="token-input">Please provide Toggl API token</label>
+        <p>Please provide Toggl API token</p>
+        <InlineForm
+          buttonLabel="OK"
+          label="Toggl API token"
+          name="token"
+          style={inline(styles.input)}
+          onChange={this.handleChange}
+          onClick={this.handleClick}
+        />
         <div>
-          <input
-            type="text"
-            id="token-input"
-            value={status === 'SUCCESS' ? token : input}
-            className={css(styles.input)}
-            onChange={this.handleChange}
-          />
-          <button type="button" onClick={this.handleClick}>OK</button>
-        </div>
-        <div>
-          {status === 'LOADING' && 'Loading...'}
+          {status === 'LOADING' && <Loader />}
           {name &&
-            <div>
-              {`Hi, ${name}! Your token looks great, `}
-              <Link to="/setup/since">proceed</Link> to next step.
-            </div>
+            <p>
+              {'Hi, '}
+              <strong>{name}</strong>
+              {'! Your token looks great, '}
+              <Link className={css(styles.link)} to="/setup/since">proceed</Link>
+              {' to next step.'}
+            </p>
           }
         </div>
       </div>
@@ -67,7 +75,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   input: {
-    width: '200px',
+    width: '375px',
+  },
+  link: {
+    ...link,
   },
 })
 

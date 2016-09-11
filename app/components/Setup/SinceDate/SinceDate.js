@@ -4,6 +4,8 @@ import { StyleSheet, css } from 'aphrodite'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
+import { InlineForm } from 'rebass'
+
 import { fullCentered } from '../../../styles/fixtures'
 import { setSinceDate } from '../../../actions'
 
@@ -24,9 +26,11 @@ class SinceDate extends Component {
     })
   }
 
-  handleClick = () => {
+  handleClick = (e) => {
     const { input } = this.state
     const { router, dispatch } = this.props
+
+    e.preventDefault()
 
     const date = moment(input, 'YYYY-MM-DD')
     const isValid = date.isValid()
@@ -45,14 +49,15 @@ class SinceDate extends Component {
     const { error } = this.state
     return (
       <div className={css(styles.container)}>
-        <label htmlFor="since-date-input">When did you start tracking time? (format YYYY-MM-DD)</label>
-        <div>
-          <input type="text" id="since-date-input" onChange={this.handleChange} />
-          <button type="button" onClick={this.handleClick}>OK</button>
-        </div>
-        <div>
-          {error && 'Invalid date!'}
-        </div>
+        <p>When did you start tracking time? (format YYYY-MM-DD)</p>
+        <InlineForm
+          buttonLabel="OK"
+          label="Date of start time tracking"
+          name="start-date"
+          onChange={this.handleChange}
+          onClick={this.handleClick}
+        />
+        {error && <p>Invalid date!</p>}
       </div>
     )
   }

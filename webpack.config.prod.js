@@ -14,6 +14,12 @@ module.exports = {
     filename: 'scripts/bundle.js',
   },
 
+  resolve: {
+    alias: {
+      aphrodite: 'aphrodite/no-important',
+    },
+  },
+
   plugins: [
     new ExtractTextPlugin('css/styles.css', { allChunks: true }),
     new webpack.DefinePlugin({
