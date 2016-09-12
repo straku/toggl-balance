@@ -27,16 +27,6 @@ function formatBalance (balance) {
   return `${balance > 0 ? '+' : '-'} ${h} : ${m} : ${s}`
 }
 
-function getBackgroundColor (balance) {
-  if (balance == null) {
-    return 'rgba(0, 0, 0, 0)'
-  }
-
-  return (balance < 0)
-    ? 'rgba(255, 65, 54, 0.4)'
-    : 'rgba(46, 204, 64, 0.4)'
-}
-
 /* eslint-disable max-len */
 const WelcomeScreen = () => (
   <div className={css(styles.welcome)}>
@@ -90,12 +80,7 @@ export class App extends Component {
     }
 
     return (
-      <div
-        className={css(styles.app)}
-        style={{
-          backgroundColor: getBackgroundColor(balance),
-        }}
-      >
+      <div className={css(styles.app)}>
         <div className={css(styles.content)}>
           {children || content}
         </div>
