@@ -7,8 +7,8 @@
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
     "start": "cross-env NODE_ENV=development node dev-server.js",
-    "test": "cross-env NODE_ENV=test karma start",
-    "test:single": "cross-env NODE_ENV=test karma start --single-run",
+    "test": "jest --watch",
+    "test:single": "jest --coverage",
     "lint": "eslint app"
   },
   "repository": {
@@ -30,19 +30,15 @@
     "babel-core": "6.14.0",
     "babel-eslint": "6.1.2",
     "babel-loader": "6.2.5",
-    "babel-plugin-__coverage__": "11.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.14.0",
     "babel-plugin-transform-flow-strip-types": "6.14.0",
     "babel-preset-es2015": "6.14.0",
     "babel-preset-react": "6.11.1",
     "babel-preset-stage-0": "6.5.0",
-    "chai": "3.5.0",
-    "chai-enzyme": "0.5.1",
     "connect-history-api-fallback": "1.3.0",
     "copy-webpack-plugin": "3.0.1",
     "cross-env": "2.0.1",
     "css-loader": "0.24.0",
-    "dirty-chai": "1.2.2",
-    "enzyme": "2.4.1",
     "eslint": "3.4.0",
     "eslint-config-airbnb": "10.0.1",
     "eslint-import-resolver-webpack": "0.5.1",
@@ -52,20 +48,10 @@
     "eslint-plugin-react": "6.2.0",
     "express": "4.14.0",
     "extract-text-webpack-plugin": "1.0.1",
-    "jsdom": "9.4.5",
-    "karma": "1.2.0",
-    "karma-coverage": "1.1.1",
-    "karma-mocha": "1.1.1",
-    "karma-mocha-reporter": "2.1.0",
-    "karma-phantomjs-launcher": "1.0.2",
-    "karma-sourcemap-loader": "0.3.7",
-    "karma-webpack": "1.8.0",
-    "mocha": "3.0.2",
-    "mocha-jsdom": "1.1.0",
+    "jest-cli": "15.1.1",
     "node-sass": "3.8.0",
     "postcss": "5.1.2",
     "postcss-loader": "0.11.1",
-    "react-addons-test-utils": "15.3.1",
     "react-hot-loader": "3.0.0-beta.2",
     "rimraf": "2.5.4",
     "sass-loader": "4.0.1",
@@ -89,5 +75,13 @@
     "redux": "3.5.2",
     "redux-logger": "2.6.1",
     "redux-thunk": "2.1.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "<rootDir>/test/file-mock.js"
+    },
+    "collectCoverageFrom": [
+      "app/**/*.js"
+    ]
   }
 }

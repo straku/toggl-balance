@@ -19,7 +19,6 @@ module.exports = {
 
   resolve: {
     alias: {
-      test: path.join(__dirname, 'test'),
       aphrodite: 'aphrodite/no-important',
     },
   },
