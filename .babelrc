@@ -10,9 +10,7 @@
       "plugins": ["react-hot-loader/babel"]
     },
     "test": {
-      "plugins": [
-        ["__coverage__", { "ignore": ["test/", "app/**/*.test.js"] }]
-      ]
+      "plugins": ["transform-es2015-modules-commonjs"]
     }
   }
 }
