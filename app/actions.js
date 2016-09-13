@@ -48,7 +48,8 @@ function getTotalTime () {
 }
 
 function calculateBalance (since, totalTime) {
-  const norm = getHours(since, moment().subtract(1, 'day'), 5, 8) * 3600 * 1000
+  const pattern = [8, 8, 8, 8, 8, 0, 0] // from monday to friday, 8 hours per day
+  const norm = getHours(since, moment().subtract(1, 'day'), pattern) * 3600 * 1000
   const balance = totalTime - norm
 
   return {

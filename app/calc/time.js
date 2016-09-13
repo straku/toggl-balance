@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import moment from 'moment'
 
 // ensures that duration will include `start` and `end` date, for date range [ 01-08-2000, 07-08-2000 ] :
@@ -15,10 +16,9 @@ function normalizeWeekDay (day) {
   return (day - 1 < 0) ? 6 : day - 1
 }
 
-function getNumberOfWorkDays (perWeek, start, end) {
+function getNumberOfFullWeeks (start, end) {
   const firstDayOfWeek = normalizeWeekDay(start.day())
   const lastDayOfWeek = normalizeWeekDay(end.day())
-
   const duration = getDurationInDays(start, end)
 
   // calculate how many days should be subtracted from total duration to leave only full weeks
@@ -29,23 +29,44 @@ function getNumberOfWorkDays (perWeek, start, end) {
   // calculate number of full weeks
   const numberOfFullWeeks = (duration - stripBefore - stripAfter) / 7
 
-  // calculate how many of subtracted days were workdays, simplified for now:
-  // it is assuming that free days are at the end of the week, so when someone works for 5 days per week free days will
-  // be Saturday and Sunday (correct for most cases IMHO), maybe give possibility to modify which days should be free
-  const freeDays = 7 - perWeek
-  const remainingBefore = (stripBefore - freeDays) > 0 ? stripBefore - freeDays : 0
-  const remainingAfter = stripAfter > perWeek ? perWeek : stripAfter
-
-  // add subtracted workdays to final result
-  return (perWeek * numberOfFullWeeks) + remainingBefore + remainingAfter
+  return {
+    weeks: numberOfFullWeeks,
+    daysBefore: stripBefore,
+    daysAfter: stripAfter,
+  }
 }
 
-function getHours (startDate, endDate, perWeek, hoursPerDay) {
+function calculateHours (pattern, week = [1, 1, 1, 1, 1, 1, 1]) {
+  return pattern.reduce((totalTime, timePerDay, i) => totalTime + (timePerDay * week[i]), 0)
+}
+
+function getCompare (leftPad) {
+  if (leftPad) return (a, b) => (a >= (7 - b))
+  return (a, b) => (a < b)
+}
+
+// when `leftPad` set to true it means that we are considering last days of week, for example
+// numberOfDays = 4 and leftPad = true generates [0, 0, 0, 1, 1, 1, 1]
+// numberOfDays = 4 and leftPad = false generates [1, 1, 1, 1, 0, 0, 0]
+function getWeekPattern (numberOfDays, leftPad = false) {
+  if (numberOfDays === 0) return new Array(7).fill(0)
+  const compare = getCompare(leftPad)
+  return _.range(7).map(day => {
+    if (compare(day, numberOfDays)) return 1
+    return 0
+  })
+}
+
+function getHours (startDate, endDate, pattern) {
   const start = moment(startDate)
   const end = moment(endDate)
-  const numberOfWorkDays = getNumberOfWorkDays(perWeek, start, end)
-
-  return numberOfWorkDays * hoursPerDay
+  const { weeks, daysBefore, daysAfter } = getNumberOfFullWeeks(start, end)
+  const hours = (
+    (calculateHours(pattern) * weeks) + // full weeks
+    calculateHours(pattern, getWeekPattern(daysBefore, true)) + // days before full weeks
+    calculateHours(pattern, getWeekPattern(daysAfter)) // days after full weeks
+  )
+  return hours
 }
 
 export default getHours
