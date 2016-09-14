@@ -1,10 +1,6 @@
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
-import { StyleSheet, css } from 'aphrodite'
 import { RouteTransition, presets } from 'react-router-transition'
-
-import { inline } from '../../styles/utils'
-import { full } from '../../styles/fixtures'
 
 function isNext (route, previousPath, nextPath) {
   const previousIndex = route.childRoutes.findIndex(item => item.path === previousPath)
@@ -16,6 +12,8 @@ function getPath (props) {
   const { location: { pathname } } = props
   return _.last(pathname.split('/'))
 }
+
+import styles from './Setup.scss'
 
 class Setup extends Component {
   state = {
@@ -39,10 +37,13 @@ class Setup extends Component {
       <RouteTransition
         pathname={location.pathname}
         component="div"
-        className={css(styles.container)}
+        className={styles.container}
         mapStyles={s => ({
           ...mapStyles(s),
-          ...inline(styles.animated),
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          top: 0,
         })}
         {...preset}
       >
@@ -57,19 +58,5 @@ Setup.propTypes = {
   location: PropTypes.object,
   route: PropTypes.object,
 }
-
-const styles = StyleSheet.create({
-  container: {
-    ...full,
-    position: 'relative',
-    boxSizing: 'border-box',
-    overflow: 'hidden',
-  },
-  animated: {
-    ...full,
-    position: 'absolute',
-    top: 0,
-  },
-})
 
 export default Setup

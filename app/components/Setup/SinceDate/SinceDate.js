@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { withRouter } from 'react-router'
-import { StyleSheet, css } from 'aphrodite'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
 import { InlineForm } from 'rebass'
 
-import { fullCentered } from '../../../styles/fixtures'
 import { setSinceDate } from '../../../actions'
+
+import styles from './SinceDate.scss'
 
 class SinceDate extends Component {
   static propTypes = {
@@ -48,7 +48,7 @@ class SinceDate extends Component {
   render () {
     const { error } = this.state
     return (
-      <div className={css(styles.container)}>
+      <div className={styles.container}>
         <p>When did you start tracking time? (format YYYY-MM-DD)</p>
         <InlineForm
           buttonLabel="OK"
@@ -62,12 +62,5 @@ class SinceDate extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    ...fullCentered,
-    flexDirection: 'column',
-  },
-})
 
 export default connect()(withRouter(SinceDate))

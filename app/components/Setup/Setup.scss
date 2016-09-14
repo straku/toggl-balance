@@ -1,0 +1,8 @@
+@import '../../styles/mixins';
+
+.container {
+  @include full();
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+}

@@ -4,6 +4,8 @@ const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+const cssModules = '?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+
 module.exports = {
   entry: [
     './app/setup/index',
@@ -50,8 +52,12 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
       },
       {
-        test: /\.scss$/,
+        test: /\.global\.scss$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader!postcss-loader'),
+      },
+      {
+        test: /^((?!\.global).)*\.scss$/,
+        loaders: ExtractTextPlugin.extract('style-loader', `css-loader${cssModules}!sass-loader!postcss-loader`),
       },
     ],
   },

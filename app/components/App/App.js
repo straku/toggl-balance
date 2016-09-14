@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-import { StyleSheet, css } from 'aphrodite'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
@@ -11,11 +10,11 @@ import { getPath } from '../../utils/router'
 import Loader from '../Loader/Loader'
 import FavoriteIcon from '../../icons/Favorite'
 
-import { full, centered, link } from '../../styles/fixtures'
-import { inline } from '../../styles/utils'
 import { Balance, User } from '../../selectors'
 
 import { getTotalTime } from '../../actions'
+
+import styles from './App.scss'
 
 function formatBalance (balance) {
   const balanceDuration = moment.duration(Math.abs(balance))
@@ -29,7 +28,7 @@ function formatBalance (balance) {
 
 /* eslint-disable max-len */
 const WelcomeScreen = () => (
-  <div className={css(styles.welcome)}>
+  <div className={styles.welcome}>
     <p>Hey, <strong>Toggl Balance</strong> is an app that helps you check how much work you did toward your goal.</p>
     <p>To do that you need to go through some steps to provide access to your tracked time on Toggl and setup your goal.</p>
     <p>Click below to proceed to setup</p>
@@ -74,62 +73,28 @@ export class App extends Component {
     if (status === 'LOADING') {
       content = <Loader />
     } else if (user.status === 'SUCCESS' && status === 'SUCCESS' && balance) {
-      content = <div className={css(styles.balance)}>{formatBalance(balance)}</div>
+      content = <div className={styles.balance}>{formatBalance(balance)}</div>
     } else {
       content = <WelcomeScreen />
     }
 
     return (
-      <div className={css(styles.app)}>
-        <div className={css(styles.content)}>
+      <div className={styles.app}>
+        <div className={styles.content}>
           {children || content}
         </div>
-        <Footer style={inline(styles.footer)}>
+        <Footer>
           <div>
             {'Made with '}
-            <FavoriteIcon className={css(styles.icon)} />
+            <FavoriteIcon className={styles.icon} />
             {' by '}
-            <a className={css(styles.link)} href="https://github.com/straku">Łukasz Strączyński</a>
+            <a className={styles.link} href="https://github.com/straku">Łukasz Strączyński</a>
           </div>
         </Footer>
       </div>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  app: {
-    ...full,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    ...full,
-    ...centered,
-  },
-  welcome: {
-    width: '600px',
-    textAlign: 'center',
-  },
-  footer: {
-    flexGrow: 0,
-    width: '600px',
-    margin: '0 auto',
-    justifyContent: 'center',
-  },
-  icon: {
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    width: '2em',
-    height: '2em',
-  },
-  balance: {
-    fontSize: '2.5em',
-  },
-  link: {
-    ...link,
-  },
-})
 
 function mapStateToProps (state) {
   return {

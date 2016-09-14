@@ -1,0 +1,14 @@
+@import '../../../styles/mixins';
+
+.container {
+  @include fullCentered();
+  flex-direction: column;
+}
+
+.link {
+  @include link();
+}
+
+:global(.InlineForm) {
+  width: 375px !important;
+}

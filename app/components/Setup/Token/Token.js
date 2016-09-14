@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-import { StyleSheet, css } from 'aphrodite'
 import { connect } from 'react-redux'
 
 import { InlineForm } from 'rebass'
@@ -9,11 +8,10 @@ import { getPath } from '../../../utils/router'
 
 import Loader from '../../Loader/Loader'
 
-import { link, fullCentered } from '../../../styles/fixtures'
-import { inline } from '../../../styles/utils'
-
 import { getUser } from '../../../actions'
 import { User } from '../../../selectors'
+
+import styles from './Token.scss'
 
 class Token extends Component {
   static propTypes = {
@@ -44,13 +42,12 @@ class Token extends Component {
     const { status, name } = this.props
 
     return (
-      <div className={css(styles.container)}>
+      <div className={styles.container}>
         <p>Please provide Toggl API token</p>
         <InlineForm
           buttonLabel="OK"
           label="Toggl API token"
           name="token"
-          style={inline(styles.input)}
           onChange={this.handleChange}
           onClick={this.handleClick}
         />
@@ -61,7 +58,7 @@ class Token extends Component {
               {'Hi, '}
               <strong>{name}</strong>
               {'! Your token looks great, '}
-              <Link className={css(styles.link)} to={getPath('/setup/since')}>proceed</Link>
+              <Link className={styles.link} to={getPath('/setup/since')}>proceed</Link>
               {' to next step.'}
             </p>
           }
@@ -70,18 +67,5 @@ class Token extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    ...fullCentered,
-    flexDirection: 'column',
-  },
-  input: {
-    width: '375px',
-  },
-  link: {
-    ...link,
-  },
-})
 
 export default connect(User.select)(Token)

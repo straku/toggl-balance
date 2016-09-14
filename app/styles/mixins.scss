@@ -1,0 +1,21 @@
+@mixin full () {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin centered () {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin link () {
+  color: inherit;
+  text-decoration: underline;
+}
+
+@mixin fullCentered () {
+  @include full();
+  @include centered();
+}
+
