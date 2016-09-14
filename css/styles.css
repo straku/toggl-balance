@@ -7,17 +7,81 @@
 #root {
   width: 100vw;
   height: 100vh; }
-.loading {
-  display: inline-block;
-  position: relative; }
-
-.loader:after {
+.Loader__loader___1_xS9:after {
   content: "...";
   position: absolute;
   width: 0;
   overflow: hidden;
-  animation: ellipsis steps(4, end) 1s infinite; }
+  animation: Loader__ellipsis____XOLl steps(4, end) 1s infinite; }
 
-@keyframes ellipsis {
+@keyframes Loader__ellipsis____XOLl {
   to {
     width: 2.4em; } }
+.App__app___Gqefs {
+  width: 100%;
+  height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+.App__content___3Btz6 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.App__welcome___24zTW {
+  width: 600px;
+  text-align: center; }
+
+.App__icon___2GamF {
+  display: inline-block;
+  vertical-align: middle;
+  width: 2em;
+  height: 2em; }
+
+.App__balance___1EexN {
+  font-size: 2.5em; }
+
+.App__link___3gI32 {
+  color: inherit;
+  text-decoration: underline; }
+
+.Footer {
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  width: 600px;
+  margin: 0 auto;
+  -ms-flex-pack: center;
+  justify-content: center; }
+.Setup__container___1jAGP {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden; }
+.Token__container___-FYDP {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+.Token__link___2T5bj {
+  color: inherit;
+  text-decoration: underline; }
+
+.InlineForm {
+  width: 375px !important; }
+.SinceDate__container___2nO1W {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column; }
