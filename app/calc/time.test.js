@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import moment from 'moment'
 
-import getHours from './time'
+import { getHours } from './time'
 
 const FORMAT = 'DD-MM-YYYY'
 
