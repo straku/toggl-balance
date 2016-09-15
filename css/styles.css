@@ -85,3 +85,55 @@
   justify-content: center;
   -ms-flex-direction: column;
   flex-direction: column; }
+.SimpleForm__container___1xPld {
+  padding: 16px; }
+  .SimpleForm__container___1xPld .Input {
+    width: 60px !important;
+    margin-bottom: 0 !important; }
+    .SimpleForm__container___1xPld .Input input {
+      text-align: center; }
+
+.SimpleForm__containerDisabled___232q4 {
+  opacity: 0.25;
+  position: relative; }
+  .SimpleForm__containerDisabled___232q4:hover:before {
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    top: 0;
+    left: 0;
+    background-color: #08e; }
+
+.SimpleForm__inline___2FiOM {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 16px; }
+  .SimpleForm__inline___2FiOM:last-child {
+    margin-bottom: 0; }
+
+.SimpleForm__faded___34t4B {
+  color: rgba(0, 0, 0, 0.25);
+  position: absolute;
+  right: -165px;
+  bottom: 0;
+  width: 150px; }
+
+.SimpleForm__label___olmNN {
+  position: relative;
+  margin-left: 15px; }
+.Workload__container___392xK {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  .Workload__container___392xK .Button {
+    margin-top: 20px !important; }
+
+.Workload__link___3jgU5 {
+  color: inherit;
+  text-decoration: underline; }
