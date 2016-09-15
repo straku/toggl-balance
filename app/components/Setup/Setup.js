@@ -2,6 +2,8 @@ import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { RouteTransition, presets } from 'react-router-transition'
 
+import styles from './Setup.scss'
+
 function isNext (route, previousPath, nextPath) {
   const previousIndex = route.childRoutes.findIndex(item => item.path === previousPath)
   const nextIndex = route.childRoutes.findIndex(item => item.path === nextPath)
@@ -12,8 +14,6 @@ function getPath (props) {
   const { location: { pathname } } = props
   return _.last(pathname.split('/'))
 }
-
-import styles from './Setup.scss'
 
 class Setup extends Component {
   state = {

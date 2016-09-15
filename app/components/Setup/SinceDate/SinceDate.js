@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import { withRouter } from 'react-router'
+import { browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
 import { InlineForm } from 'rebass'
 
+import { getPath } from '../../../utils/router'
 import { setSinceDate } from '../../../actions'
 
 import styles from './SinceDate.scss'
@@ -28,7 +29,7 @@ class SinceDate extends Component {
 
   handleClick = (e) => {
     const { input } = this.state
-    const { router, dispatch } = this.props
+    const { dispatch } = this.props
 
     e.preventDefault()
 
@@ -40,7 +41,7 @@ class SinceDate extends Component {
     }, () => {
       if (isValid) {
         dispatch(setSinceDate(input))
-        router.push('/')
+        browserHistory.push(getPath('/setup/workload'))
       }
     })
   }
@@ -63,4 +64,4 @@ class SinceDate extends Component {
   }
 }
 
-export default connect()(withRouter(SinceDate))
+export default connect()(SinceDate)

@@ -69,4 +69,12 @@ function getHours (startDate, endDate, pattern) {
   return hours
 }
 
-export default getHours
+// helper function for calculating week work pattern
+function getPattern (perWeek, perDay) {
+  return _.range(7).map(i => {
+    if (i < perWeek) return perDay
+    return 0
+  })
+}
+
+export { getHours, getPattern }

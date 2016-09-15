@@ -1,0 +1,51 @@
+.container {
+  padding: 16px;
+
+  :global(.Input) {
+    width: 60px !important;
+    margin-bottom: 0 !important;
+
+    input {
+      text-align: center;
+    }
+  }
+}
+
+.containerDisabled {
+  opacity: 0.25;
+  position: relative;
+
+  &:hover {
+    &:before {
+      position: absolute;
+      height: 100%;
+      width: 2px;
+      top: 0;
+      left: 0;
+      background-color: #08e;
+    }
+  }
+}
+
+.inline {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.faded {
+  color: rgba(0, 0, 0, 0.25);
+  position: absolute;
+  right: -165px;
+  bottom: 0;
+  width: 150px;
+}
+
+.label {
+  position: relative;
+  margin-left: 15px;
+}

@@ -1,0 +1,14 @@
+@import '../../../styles/mixins';
+
+.container {
+  @include fullCentered();
+  flex-direction: column;
+
+  :global(.Button) {
+    margin-top: 20px !important;
+  }
+}
+
+.link {
+  @include link();
+}

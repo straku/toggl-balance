@@ -1,8 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { browserHistory } from 'react-router'
 
 function redirect (ComposedComponent) {
   return class Redirect extends Component {
+    static propTypes = {
+      location: PropTypes.object.isRequired,
+    }
+
     componentDidMount () {
       const { location } = this.props
       const pathname = sessionStorage.getItem('pathname')

@@ -14,6 +14,7 @@ const initialState = {
     data: null,
   },
   sinceDate: null,
+  pattern: null,
   balance: null,
 }
 
@@ -69,6 +70,11 @@ const reducers = {
   [actions.sinceDate]: (state, sinceDate) => ({
     ...state,
     sinceDate,
+  }),
+
+  [actions.pattern]: (state, pattern) => ({
+    ...state,
+    pattern,
   }),
 
   [actions.balance]: (state, balance) => ({

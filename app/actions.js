@@ -3,12 +3,13 @@ import moment from 'moment'
 import api from './toggl/api'
 import { createAsyncActionTypes, request, requestSuccess, requestError } from './utils/actions'
 
-import getHours from './calc/time'
+import { getHours } from './calc/time'
 
 const actions = {
   user: createAsyncActionTypes('USER'),
   totalTime: createAsyncActionTypes('TOTAL_TIME'),
   sinceDate: 'SET_SINCE_DATE',
+  pattern: 'SET_PATTERN',
   balance: 'SET_BALANCE',
 }
 
@@ -16,6 +17,13 @@ function setSinceDate (date) {
   return {
     type: actions.sinceDate,
     payload: date,
+  }
+}
+
+function setPattern (pattern) {
+  return {
+    type: actions.pattern,
+    payload: pattern,
   }
 }
 
@@ -33,7 +41,7 @@ function getTotalTime () {
   const type = actions.totalTime
   return (dispatch, getState) => {
     const state = getState()
-    const { user: { token, workspaces }, sinceDate: since } = state
+    const { user: { token, workspaces }, sinceDate: since, pattern } = state
     dispatch(request(type))
     api.summary(token, {
       since,
@@ -41,14 +49,13 @@ function getTotalTime () {
     })
       .then(totalTime => {
         dispatch(requestSuccess(type, totalTime))
-        dispatch(calculateBalance(since, totalTime))
+        dispatch(calculateBalance(since, totalTime, pattern))
       })
       .catch(err => dispatch(requestError(type, err)))
   }
 }
 
-function calculateBalance (since, totalTime) {
-  const pattern = [8, 8, 8, 8, 8, 0, 0] // from monday to friday, 8 hours per day
+function calculateBalance (since, totalTime, pattern) {
   const norm = getHours(since, moment().subtract(1, 'day'), pattern) * 3600 * 1000
   const balance = totalTime - norm
 
@@ -58,6 +65,6 @@ function calculateBalance (since, totalTime) {
   }
 }
 
-export { getUser, setSinceDate, getTotalTime }
+export { getUser, setSinceDate, setPattern, getTotalTime }
 
 export default actions
