@@ -5,7 +5,7 @@ import moment from 'moment'
 
 import { Footer, Button } from 'rebass'
 
-import { getPath } from '../../utils/router'
+import { getBasePath, getPath } from '../../utils/router'
 
 import Loader from '../Loader/Loader'
 import FavoriteIcon from '../../icons/Favorite'
@@ -57,7 +57,7 @@ export class App extends Component {
     const { balance, status, user, location, dispatch } = props
 
     if (
-      location.pathname === '/' &&
+      location.pathname === `${getBasePath()}/` &&
       user.status === 'SUCCESS' &&
       status === null &&
       balance === null
